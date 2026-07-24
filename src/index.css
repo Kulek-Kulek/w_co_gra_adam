@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background-color: #1a1816;
+    color: #e0d7c6;
+  }
+}
+
+.font-serif {
+  font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+.font-mono {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.artistic-card {
+  position: relative;
+  background-color: #1f1d1b;
+  border: 1px solid #3e3a35;
+}
+
+.artistic-card::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 14px;
+  height: 14px;
+  border-top: 1px solid #b08d57;
+  border-left: 1px solid #b08d57;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.artistic-card::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 14px;
+  height: 14px;
+  border-bottom: 1px solid #b08d57;
+  border-right: 1px solid #b08d57;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(0.99); }
+}
+
+@keyframes float-up {
+  0% { opacity: 0; transform: translateY(8px); }
+  20% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; transform: translateY(-12px); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.animate-float-up {
+  animation: float-up 2s ease-out forwards;
+}
+
+/* Custom scrollbar for game text & cards */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #151413;
+}
+::-webkit-scrollbar-thumb {
+  background: #3e3a35;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b08d57;
+}

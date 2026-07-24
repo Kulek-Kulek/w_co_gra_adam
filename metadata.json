@@ -1,0 +1,6 @@
+{
+  "name": "W co gra Adam",
+  "description": "Interaktywna gra paragrafowa dla rodziców dzieci 4-10 lat o opanowywaniu wyzwań cyfrowych i budowaniu relacji z książką i szachami.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
