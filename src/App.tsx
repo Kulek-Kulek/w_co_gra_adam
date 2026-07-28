@@ -7,7 +7,7 @@ import { StoryNode } from './components/StoryNode';
 import { GameOverView } from './components/GameOverView';
 import { SuccessView } from './components/SuccessView';
 import { sounds } from './utils/audio';
-import { BookOpen, Sparkles, Play, ShieldAlert, Heart, Brain, Save } from 'lucide-react';
+import { BookOpen, Sparkles, Play, ShieldAlert, Heart, Brain } from 'lucide-react';
 
 const STORAGE_KEY = 'w_co_gra_adam_save_state';
 
@@ -204,65 +204,75 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#1a1816] text-[#e0d7c6] font-serif py-6 px-3 sm:px-6 flex flex-col justify-between selection:bg-[#b08d57] selection:text-[#1a1816]">
+    <div className="min-h-screen bg-[#f7f3eb] text-[#2e2a25] font-serif py-6 px-3 sm:px-6 flex flex-col justify-between selection:bg-[#8a652e] selection:text-[#ffffff]">
       <div className="w-full max-w-3xl mx-auto flex-1">
-        {/* Splash Landing View (Artistic Flair Style) */}
+        {/* Splash Landing View */}
         {currentNodeId === 'splash' ? (
-          <div className="w-full max-w-2xl mx-auto py-8 sm:py-12 text-center flex flex-col items-center justify-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#23211f] border border-[#3e3a35] text-[#b08d57] font-mono text-xs uppercase tracking-[0.2em] mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-[#b08d57]" />
+          <div className="w-full max-w-2xl mx-auto py-6 sm:py-10 text-center flex flex-col items-center justify-center">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f3ede2] border border-[#e2d9cc] text-[#8a652e] font-mono text-xs uppercase tracking-[0.2em] mb-4 font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-[#8a652e]" />
               <span>Interaktywny Scenariusz Przygodowy (3–5 min)</span>
             </div>
 
-            <h1 className="font-serif text-4xl sm:text-6xl font-bold text-[#f5efe6] leading-tight mb-3 tracking-tighter uppercase">
+            <h1 className="font-serif text-4xl sm:text-6xl font-bold text-[#1a1714] leading-tight mb-2 tracking-tighter uppercase">
               W CO GRA<br />ADAM?
             </h1>
 
-            <p className="font-mono text-xs sm:text-sm text-[#b08d57] uppercase tracking-[0.25em] mb-8">
+            <p className="font-mono text-xs sm:text-sm text-[#8a652e] uppercase tracking-[0.25em] mb-6 font-semibold">
               #OpanujWyzwanieCyfrowe &bull; #ProjektPL
             </p>
 
-            <div className="artistic-card rounded-lg p-6 sm:p-8 mb-8 text-left max-w-xl mx-auto shadow-2xl">
-              <p className="font-serif text-base sm:text-lg text-[#d8cfc0] leading-relaxed">
-                Sobotnie popołudnie. Pijesz ciepłą kawę. Dziecko podchodzi i rzuca: <em className="text-[#f0e8db] border-b border-[#b08d57]/40 pb-0.5">„Nudzi mi się... Mogę tablet? Tylko na chwilę!”</em>.
+            {/* Splash Illustration Image Banner */}
+            <div className="w-full max-w-md mx-auto mb-6 rounded-xl overflow-hidden border border-[#e2d9cc] shadow-md bg-[#ffffff]">
+              <img
+                src="/images/coffee_mug.jpg"
+                alt="Kawa w kubku - W co gra Adam"
+                referrerPolicy="no-referrer"
+                className="w-full h-56 sm:h-64 object-cover object-center"
+              />
+            </div>
+
+            <div className="artistic-card rounded-xl p-6 sm:p-8 mb-6 text-left max-w-xl mx-auto shadow-md bg-[#ffffff]">
+              <p className="font-serif text-base sm:text-lg text-[#3a352e] leading-relaxed">
+                Sobotnie popołudnie. Pijesz ciepłą kawę. Dziecko podchodzi i rzuca: <em className="text-[#1a1714] font-bold border-b border-[#8a652e]/40 pb-0.5">„Nudzi mi się... Mogę tablet? Tylko na chwilę!”</em>.
                 <br /><br />
                 Podejmuj decyzje rodzicielskie. Obserwuj wskaźniki skupienia, energii i relacji. Odkryj, jak przenieść uwagę dziecka z cyfrowego ekranu do świata książki i szachów!
               </p>
             </div>
 
             {/* Quick Metrics Teaser */}
-            <div className="w-full max-w-lg grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-10 font-mono text-xs">
-              <div className="bg-[#151413] border border-[#3e3a35] p-3 rounded text-center">
-                <Brain className="w-4 h-4 text-[#b08d57] mx-auto mb-1" />
-                <span className="block text-[10px] uppercase tracking-wider text-[#a09888]">Skupienie</span>
-                <span className="font-bold text-[#f0e8db]">30%</span>
+            <div className="w-full max-w-lg grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-8 font-mono text-xs">
+              <div className="bg-[#ffffff] border border-[#e2d9cc] p-3 rounded-lg text-center shadow-sm">
+                <Brain className="w-4 h-4 text-[#8a652e] mx-auto mb-1" />
+                <span className="block text-[10px] uppercase tracking-wider text-[#736c61]">Skupienie</span>
+                <span className="font-bold text-[#1a1714]">30%</span>
               </div>
-              <div className="bg-[#151413] border border-[#3e3a35] p-3 rounded text-center">
-                <Heart className="w-4 h-4 text-[#b08d57] mx-auto mb-1" />
-                <span className="block text-[10px] uppercase tracking-wider text-[#a09888]">Relacja</span>
-                <span className="font-bold text-[#f0e8db]">70%</span>
+              <div className="bg-[#ffffff] border border-[#e2d9cc] p-3 rounded-lg text-center shadow-sm">
+                <Heart className="w-4 h-4 text-[#8a652e] mx-auto mb-1" />
+                <span className="block text-[10px] uppercase tracking-wider text-[#736c61]">Relacja</span>
+                <span className="font-bold text-[#1a1714]">70%</span>
               </div>
-              <div className="bg-[#151413] border border-[#3e3a35] p-3 rounded text-center">
-                <ShieldAlert className="w-4 h-4 text-[#b08d57] mx-auto mb-1" />
-                <span className="block text-[10px] uppercase tracking-wider text-[#a09888]">Energia</span>
-                <span className="font-bold text-[#f0e8db]">80%</span>
+              <div className="bg-[#ffffff] border border-[#e2d9cc] p-3 rounded-lg text-center shadow-sm">
+                <ShieldAlert className="w-4 h-4 text-[#8a652e] mx-auto mb-1" />
+                <span className="block text-[10px] uppercase tracking-wider text-[#736c61]">Energia</span>
+                <span className="font-bold text-[#1a1714]">80%</span>
               </div>
-              <div className="bg-[#151413] border border-[#3e3a35] p-3 rounded text-center">
-                <BookOpen className="w-4 h-4 text-[#b08d57] mx-auto mb-1" />
-                <span className="block text-[10px] uppercase tracking-wider text-[#a09888]">Ruch</span>
-                <span className="font-bold text-[#f0e8db]">45%</span>
+              <div className="bg-[#ffffff] border border-[#e2d9cc] p-3 rounded-lg text-center shadow-sm">
+                <BookOpen className="w-4 h-4 text-[#8a652e] mx-auto mb-1" />
+                <span className="block text-[10px] uppercase tracking-wider text-[#736c61]">Ruch</span>
+                <span className="font-bold text-[#1a1714]">45%</span>
               </div>
             </div>
 
             <button
               onClick={handleStartGame}
-              className="bg-[#b08d57] hover:bg-[#c4a473] text-[#1a1816] font-bold uppercase tracking-widest text-sm py-4 px-10 rounded shadow-2xl transition-all cursor-pointer flex items-center gap-3 transform hover:-translate-y-0.5 border border-[#e0d7c6]/20"
+              className="bg-[#8a652e] hover:bg-[#735323] text-[#ffffff] font-bold uppercase tracking-widest text-sm py-4 px-10 rounded-lg shadow-lg transition-all cursor-pointer flex items-center gap-3 transform hover:-translate-y-0.5"
             >
               <Play className="w-4 h-4 fill-current" />
               <span>Rozpocznij Symulację</span>
             </button>
 
-            <div className="mt-8 font-mono text-[11px] text-[#8c8273]">
+            <div className="mt-8 font-mono text-[11px] text-[#736c61]">
               Gra inspirowana nadchodzącą książką autorki Anny Szczypki — „Adam gra w szachy”.
             </div>
           </div>
@@ -310,7 +320,7 @@ export default function App() {
       </div>
 
       {/* Footer Branding */}
-      <footer className="w-full max-w-3xl mx-auto mt-12 pt-6 border-t border-[#3e3a35] flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#8c8273] gap-2 select-none">
+      <footer className="w-full max-w-3xl mx-auto mt-12 pt-6 border-t border-[#e2d9cc] flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#736c61] gap-2 select-none">
         <span>Fundacja ProjektPL &bull; Gra „W co gra Adam”</span>
         <span>Autorzy: Anna Szczypka &bull; 2026</span>
       </footer>

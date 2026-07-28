@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, Sparkles, BookOpen } from 'lucide-react';
+import { Volume2, BookOpen } from 'lucide-react';
 
 interface PieceInfo {
   id: string;
@@ -74,21 +74,21 @@ export const MiniChessBoard: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#151413] border border-[#3e3a35] rounded-xl p-5 shadow-lg my-6">
-      <div className="flex items-center justify-between mb-4 border-b border-[#3e3a35] pb-2">
+    <div className="bg-[#faf8f5] border border-[#e2d9cc] rounded-xl p-5 shadow-sm my-6">
+      <div className="flex items-center justify-between mb-4 border-b border-[#e2d9cc] pb-2">
         <div className="flex items-center gap-2">
-          <BookOpen className="w-4 h-4 text-[#b08d57]" />
-          <h3 className="font-mono text-xs text-[#b08d57] uppercase tracking-wider font-semibold">
+          <BookOpen className="w-4 h-4 text-[#8a652e]" />
+          <h3 className="font-mono text-xs text-[#8a652e] uppercase tracking-wider font-semibold">
             Interaktywny Słowniczek Szachowy Adasia
           </h3>
         </div>
-        <span className="font-mono text-[10px] text-[#8c8273]">
+        <span className="font-mono text-[10px] text-[#736c61]">
           Kliknij figurę
         </span>
       </div>
 
       {/* Piece Selection Grid */}
-      <div className="grid grid-cols-6 gap-1.5 mb-4 bg-[#1f1d1b] p-2 rounded border border-[#3e3a35]">
+      <div className="grid grid-cols-6 gap-1.5 mb-4 bg-[#f3ede2] p-2 rounded border border-[#e2d9cc]">
         {CHESS_PIECES.map((piece) => {
           const isSelected = selectedPiece.id === piece.id;
           return (
@@ -97,8 +97,8 @@ export const MiniChessBoard: React.FC = () => {
               onClick={() => setSelectedPiece(piece)}
               className={`flex flex-col items-center justify-center p-2 rounded transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-[#23211f] border border-[#b08d57] text-[#f5efe6] shadow-inner scale-105'
-                  : 'bg-[#151413] border border-[#3e3a35] text-[#a09888] hover:border-[#b08d57]/60 hover:text-[#f0e8db]'
+                  ? 'bg-[#ffffff] border border-[#8a652e] text-[#1a1714] shadow-sm scale-105 font-bold'
+                  : 'bg-[#faf8f5] border border-[#e2d9cc] text-[#5e564b] hover:border-[#8a652e]/60 hover:text-[#1a1714]'
               }`}
             >
               <span className="text-2xl sm:text-3xl select-none leading-none mb-1">
@@ -113,29 +113,29 @@ export const MiniChessBoard: React.FC = () => {
       </div>
 
       {/* Active Piece Card Detail */}
-      <div className="bg-[#23211f] border border-[#3e3a35] rounded-lg p-4 flex flex-col sm:flex-row items-center gap-4">
-        <div className="w-16 h-16 rounded-lg bg-[#151413] border border-[#3e3a35] flex items-center justify-center text-4xl text-[#b08d57] shrink-0 shadow-inner">
+      <div className="bg-[#ffffff] border border-[#e2d9cc] rounded-lg p-4 flex flex-col sm:flex-row items-center gap-4 shadow-sm">
+        <div className="w-16 h-16 rounded-lg bg-[#f3ede2] border border-[#e2d9cc] flex items-center justify-center text-4xl text-[#8a652e] shrink-0 shadow-inner">
           {selectedPiece.symbol}
         </div>
 
         <div className="flex-1 text-center sm:text-left min-w-0">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
-            <span className="font-serif text-lg font-bold text-[#f5efe6]">
+            <span className="font-serif text-lg font-bold text-[#1a1714]">
               {selectedPiece.namePl}
             </span>
-            <span className="font-mono text-sm text-[#b08d57] font-semibold bg-[#151413] px-2.5 py-0.5 rounded border border-[#3e3a35] flex items-center gap-1.5">
+            <span className="font-mono text-sm text-[#8a652e] font-semibold bg-[#f3ede2] px-2.5 py-0.5 rounded border border-[#e2d9cc] flex items-center gap-1.5">
               {selectedPiece.nameEn} {selectedPiece.phonetic}
               <button
                 onClick={() => speakEn(selectedPiece.nameEn)}
                 title="Posłuchaj wymowy"
-                className="hover:text-[#ffffff] transition-colors p-0.5 cursor-pointer"
+                className="hover:text-[#1a1714] transition-colors p-0.5 cursor-pointer"
               >
-                <Volume2 className="w-3.5 h-3.5 text-[#d9b882]" />
+                <Volume2 className="w-3.5 h-3.5 text-[#8a652e]" />
               </button>
             </span>
           </div>
 
-          <p className="font-sans text-xs text-[#a09888] leading-relaxed">
+          <p className="font-sans text-xs text-[#5e564b] leading-relaxed">
             {selectedPiece.desc}
           </p>
         </div>

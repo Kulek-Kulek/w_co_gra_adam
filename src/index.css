@@ -3,8 +3,8 @@
 @layer base {
   body {
     font-family: 'Libre Baskerville', Georgia, serif;
-    background-color: #1a1816;
-    color: #e0d7c6;
+    background-color: #f7f3eb;
+    color: #2e2a25;
   }
 }
 
@@ -22,33 +22,34 @@
 
 .artistic-card {
   position: relative;
-  background-color: #1f1d1b;
-  border: 1px solid #3e3a35;
+  background-color: #ffffff;
+  border: 1px solid #e2d9cc;
+  box-shadow: 0 10px 25px -5px rgba(44, 40, 37, 0.08), 0 8px 10px -6px rgba(44, 40, 37, 0.04);
 }
 
 .artistic-card::before {
   content: '';
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 10px;
+  left: 10px;
   width: 14px;
   height: 14px;
-  border-top: 1px solid #b08d57;
-  border-left: 1px solid #b08d57;
-  opacity: 0.4;
+  border-top: 1.5px solid #8a652e;
+  border-left: 1.5px solid #8a652e;
+  opacity: 0.5;
   pointer-events: none;
 }
 
 .artistic-card::after {
   content: '';
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 10px;
+  right: 10px;
   width: 14px;
   height: 14px;
-  border-bottom: 1px solid #b08d57;
-  border-right: 1px solid #b08d57;
-  opacity: 0.4;
+  border-bottom: 1.5px solid #8a652e;
+  border-right: 1.5px solid #8a652e;
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -78,12 +79,13 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #151413;
+  background: #f0e8db;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3e3a35;
+  background: #c2b8a8;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b08d57;
+  background: #8a652e;
 }
+

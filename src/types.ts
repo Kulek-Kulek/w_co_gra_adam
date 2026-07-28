@@ -30,6 +30,7 @@ export interface GameNode {
   progressPercent: number;
   title?: string;
   text: string;
+  image?: string;
   choices: Choice[];
   // For Game Over nodes:
   finalStatsOverview?: {

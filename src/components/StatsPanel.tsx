@@ -9,9 +9,9 @@ interface StatsPanelProps {
 
 export const StatsPanel: React.FC<StatsPanelProps> = ({ stats, lastDelta }) => {
   const getBarColor = (val: number) => {
-    if (val >= 60) return 'bg-[#4a7c59] text-[#73b284]';
-    if (val >= 35) return 'bg-[#b08d57] text-[#e0c36e]';
-    return 'bg-[#c4472a] text-[#e87056] animate-pulse';
+    if (val >= 60) return 'bg-[#5e7a5b] text-[#5e7a5b]';
+    if (val >= 35) return 'bg-[#8a652e] text-[#8a652e]';
+    return 'bg-[#c26343] text-[#c26343] animate-pulse';
   };
 
   const statItems = [
@@ -50,17 +50,17 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ stats, lastDelta }) => {
   ];
 
   return (
-    <div className="w-full max-w-2xl mx-auto mb-8 artistic-card rounded-lg p-4 sm:p-5 shadow-2xl select-none">
-      <div className="flex items-center justify-between mb-3 border-b border-[#3e3a35] pb-2">
-        <span className="font-mono text-[11px] tracking-[0.15em] text-[#a09888] uppercase font-semibold">
+    <div className="w-full max-w-2xl mx-auto mb-6 artistic-card rounded-xl p-4 sm:p-5 shadow-lg select-none">
+      <div className="flex items-center justify-between mb-3 border-b border-[#e2d9cc] pb-2">
+        <span className="font-mono text-[11px] tracking-[0.15em] text-[#5e564b] uppercase font-bold">
           Wskaźniki stanu (0–100%)
         </span>
-        <span className="font-mono text-[10px] text-[#8c8273]">
+        <span className="font-mono text-[10px] text-[#736c61]">
           Cel: Równowaga i wyciszenie
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {statItems.map((item) => {
           const Icon = item.icon;
           const deltaVal = item.delta;
@@ -69,12 +69,12 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ stats, lastDelta }) => {
           return (
             <div
               key={item.key}
-              className="relative bg-[#151413] border border-[#3e3a35] rounded p-3 flex flex-col justify-between"
+              className="relative bg-[#faf8f5] border border-[#e2d9cc] rounded-lg p-3 flex flex-col justify-between"
             >
               <div className="flex items-center justify-between gap-1 mb-1.5">
                 <div className="flex items-center gap-1.5 min-w-0">
-                  <Icon className="w-3.5 h-3.5 text-[#b08d57] shrink-0" />
-                  <span className="font-sans text-xs font-semibold text-[#f0e8db] truncate">
+                  <Icon className="w-3.5 h-3.5 text-[#8a652e] shrink-0" />
+                  <span className="font-sans text-xs font-semibold text-[#2c2825] truncate">
                     {item.label}
                   </span>
                 </div>
@@ -84,18 +84,18 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ stats, lastDelta }) => {
                     <span
                       key={Date.now() + item.key}
                       className={`animate-float-up text-[11px] font-bold ${
-                        deltaVal > 0 ? 'text-[#52aa6a]' : 'text-[#e5593e]'
+                        deltaVal > 0 ? 'text-[#3e6939]' : 'text-[#a64d30]'
                       }`}
                     >
                       {deltaVal > 0 ? `+${deltaVal}` : deltaVal}
                     </span>
                   )}
-                  <span className="font-bold text-[#f0e8db]">{displayVal}%</span>
+                  <span className="font-bold text-[#1a1714]">{displayVal}%</span>
                 </div>
               </div>
 
               {/* Progress Bar Container */}
-              <div className="w-full h-2 bg-[#23211f] rounded-full overflow-hidden relative border border-[#3e3a35]/50">
+              <div className="w-full h-2 bg-[#eee8dd] rounded-full overflow-hidden relative border border-[#e2d9cc]">
                 <div
                   className={`h-full transition-all duration-700 ease-out rounded-full ${getBarColor(
                     displayVal
@@ -104,7 +104,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ stats, lastDelta }) => {
                 />
               </div>
 
-              <div className="mt-1 text-[10px] text-[#8c8273] font-mono flex justify-between">
+              <div className="mt-1 text-[10px] text-[#736c61] font-mono flex justify-between">
                 <span>{item.shortDesc}</span>
               </div>
             </div>
