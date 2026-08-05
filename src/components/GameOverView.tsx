@@ -1,6 +1,6 @@
 import React from 'react';
 import { GameNode } from '../types';
-import { AlertTriangle, RotateCcw, ArrowLeft, Brain, HeartHandshake, BatteryCharging, Sparkles } from 'lucide-react';
+import { AlertTriangle, RotateCcw, ArrowLeft } from 'lucide-react';
 
 interface GameOverViewProps {
   node: GameNode;
@@ -15,13 +15,6 @@ export const GameOverView: React.FC<GameOverViewProps> = ({
   onUndoLastStep,
   canUndo,
 }) => {
-  const stats = node.finalStatsOverview || {
-    childFocus: 0,
-    familyBond: 20,
-    parentEnergy: 20,
-    creativityMovement: 10,
-  };
-
   return (
     <div className="w-full max-w-2xl mx-auto bg-[#ffffff] border border-[#e5a092] rounded-xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
       {/* Top Warning Accent */}
@@ -32,7 +25,7 @@ export const GameOverView: React.FC<GameOverViewProps> = ({
           <AlertTriangle className="w-4 h-4" />
         </span>
         <span className="font-mono text-xs tracking-[0.2em] text-[#c26343] uppercase font-bold">
-          {node.actTitle || 'Ślepy zaułek (Game Over)'}
+          Ślepy Zaułek
         </span>
       </div>
 
@@ -56,47 +49,6 @@ export const GameOverView: React.FC<GameOverViewProps> = ({
           </p>
         </div>
       )}
-
-      {/* Final Outcome Metrics */}
-      <div className="mb-8 bg-[#faf8f5] border border-[#e2d9cc] rounded-lg p-4">
-        <span className="block font-mono text-xs text-[#736c61] uppercase tracking-wider mb-3">
-          Wskaźniki końcowe tej ścieżki:
-        </span>
-
-        <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-          <div className="flex items-center justify-between bg-[#ffffff] p-2.5 rounded border border-[#e2d9cc]">
-            <span className="text-[#5e564b] flex items-center gap-1">
-              <Brain className="w-3.5 h-3.5 text-[#c26343]" />
-              Skupienie Dziecka:
-            </span>
-            <span className="font-bold text-[#c26343]">{stats.childFocus}%</span>
-          </div>
-
-          <div className="flex items-center justify-between bg-[#ffffff] p-2.5 rounded border border-[#e2d9cc]">
-            <span className="text-[#5e564b] flex items-center gap-1">
-              <HeartHandshake className="w-3.5 h-3.5 text-[#c26343]" />
-              Wspólna Relacja:
-            </span>
-            <span className="font-bold text-[#c26343]">{stats.familyBond}%</span>
-          </div>
-
-          <div className="flex items-center justify-between bg-[#ffffff] p-2.5 rounded border border-[#e2d9cc]">
-            <span className="text-[#5e564b] flex items-center gap-1">
-              <BatteryCharging className="w-3.5 h-3.5 text-[#c26343]" />
-              Energia Rodzica:
-            </span>
-            <span className="font-bold text-[#c26343]">{stats.parentEnergy}%</span>
-          </div>
-
-          <div className="flex items-center justify-between bg-[#ffffff] p-2.5 rounded border border-[#e2d9cc]">
-            <span className="text-[#5e564b] flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-[#c26343]" />
-              Kreatywność i Ruch:
-            </span>
-            <span className="font-bold text-[#c26343]">{stats.creativityMovement}%</span>
-          </div>
-        </div>
-      </div>
 
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-3">

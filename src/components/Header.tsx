@@ -1,27 +1,35 @@
 import React from 'react';
-import { Volume2, VolumeX, RotateCcw, ArrowLeft, BookOpen } from 'lucide-react';
+import { Volume2, VolumeX, RotateCcw, ArrowLeft, BookOpen, Users } from 'lucide-react';
+import { NodeType } from '../types';
 
 interface HeaderProps {
   actTitle?: string;
   timeLabel?: string;
   progressPercent: number;
+  nodeType?: NodeType;
   soundEnabled: boolean;
   onToggleSound: () => void;
   onRestart: () => void;
   canGoBack: boolean;
   onGoBack: () => void;
+  onOpenTeamModal: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   actTitle,
   timeLabel,
   progressPercent,
+  nodeType,
   soundEnabled,
   onToggleSound,
   onRestart,
   canGoBack,
   onGoBack,
+  onOpenTeamModal,
 }) => {
+  const isGameOver = nodeType === 'game_over';
+  const isSuccess = nodeType === 'success';
+
   return (
     <header className="w-full max-w-2xl mx-auto mb-6 select-none">
       <div className="flex items-center justify-between border-b border-[#e2d9cc] pb-3 mb-3">
@@ -35,7 +43,16 @@ export const Header: React.FC<HeaderProps> = ({
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <button
+            onClick={onOpenTeamModal}
+            title="Zespół"
+            className="flex items-center gap-1 text-xs font-mono text-[#5e564b] hover:text-[#1a1714] transition-colors px-2 py-1 rounded bg-[#f3ede2] hover:bg-[#eae1d0] border border-[#e2d9cc] hover:border-[#8a652e] cursor-pointer"
+          >
+            <Users className="w-3.5 h-3.5 text-[#8a652e]" />
+            <span className="hidden sm:inline">Zespół</span>
+          </button>
+
           {canGoBack && (
             <button
               onClick={onGoBack}
@@ -73,8 +90,16 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Progress Line */}
       <div className="w-full bg-[#eee8dd] h-2 rounded-full overflow-hidden border border-[#e2d9cc] mb-3">
         <div
-          className="bg-gradient-to-r from-[#a87f42] via-[#8a652e] to-[#5e7a5b] h-full transition-all duration-500 ease-out"
-          style={{ width: `${Math.min(100, Math.max(0, progressPercent))}%` }}
+          className={`h-full transition-all duration-500 ease-out ${
+            isGameOver
+              ? 'bg-[#c26343]'
+              : isSuccess
+              ? 'bg-gradient-to-r from-[#a87f42] via-[#8a652e] to-[#d9b882]'
+              : 'bg-gradient-to-r from-[#a87f42] via-[#8a652e] to-[#5e7a5b]'
+          }`}
+          style={{
+            width: isGameOver || isSuccess ? '100%' : `${Math.min(100, Math.max(0, progressPercent))}%`,
+          }}
         />
       </div>
 

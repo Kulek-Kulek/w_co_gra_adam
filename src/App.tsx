@@ -7,7 +7,7 @@ import { StoryNode } from './components/StoryNode';
 import { GameOverView } from './components/GameOverView';
 import { SuccessView } from './components/SuccessView';
 import { sounds } from './utils/audio';
-import { BookOpen, Sparkles, Play, ShieldAlert, Heart, Brain } from 'lucide-react';
+import { BookOpen, Sparkles, Play, ShieldAlert, Heart, Brain, Users, X } from 'lucide-react';
 
 const STORAGE_KEY = 'w_co_gra_adam_save_state';
 
@@ -75,6 +75,7 @@ export default function App() {
 
   const [lastDelta, setLastDelta] = useState<ChoiceEffect | null>(null);
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [showTeamModal, setShowTeamModal] = useState<boolean>(false);
 
   // Automatically save state whenever core game progress updates
   useEffect(() => {
@@ -171,15 +172,25 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Undo last step
+  // Undo last step & reset wentOutdoor if no longer on outdoor path
   const handleGoBack = () => {
     if (history.length === 0) return;
     sounds.playChoice();
 
+    const newHistory = history.slice(0, -1);
     const lastHistory = history[history.length - 1];
+
+    // Check if outdoor path remains anywhere in remaining history or target node
+    const isOutdoorPath = (id: string) =>
+      id === 'p1_wyjscie_dwor' || id === 'p3_dwor_kapitulacja' || id === 'p3_dwor_awantura';
+
+    const stillOutdoor =
+      newHistory.some((item) => isOutdoorPath(item.nodeId)) || isOutdoorPath(lastHistory.nodeId);
+
     setStats(lastHistory.statsBefore);
     setCurrentNodeId(lastHistory.nodeId);
-    setHistory((prev) => prev.slice(0, -1));
+    setHistory(newHistory);
+    setWentOutdoor(stillOutdoor);
     setLastDelta(null);
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -236,7 +247,7 @@ export default function App() {
               <p className="font-serif text-base sm:text-lg text-[#3a352e] leading-relaxed">
                 Sobotnie popołudnie. Pijesz ciepłą kawę. Dziecko podchodzi i rzuca: <em className="text-[#1a1714] font-bold border-b border-[#8a652e]/40 pb-0.5">„Nudzi mi się... Mogę tablet? Tylko na chwilę!”</em>.
                 <br /><br />
-                Podejmuj decyzje rodzicielskie. Obserwuj wskaźniki skupienia, energii i relacji. Odkryj, jak przenieść uwagę dziecka z cyfrowego ekranu do świata książki i szachów!
+                Obserwuj, jak Twoje decyzje odbijają się na czterech obszarach. Odkryj, jak przenieść uwagę dziecka z cyfrowego ekranu do świata książki i szachów!
               </p>
             </div>
 
@@ -264,16 +275,35 @@ export default function App() {
               </div>
             </div>
 
-            <button
-              onClick={handleStartGame}
-              className="bg-[#8a652e] hover:bg-[#735323] text-[#ffffff] font-bold uppercase tracking-widest text-sm py-4 px-10 rounded-lg shadow-lg transition-all cursor-pointer flex items-center gap-3 transform hover:-translate-y-0.5"
-            >
-              <Play className="w-4 h-4 fill-current" />
-              <span>Rozpocznij Symulację</span>
-            </button>
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <button
+                onClick={handleStartGame}
+                className="bg-[#8a652e] hover:bg-[#735323] text-[#ffffff] font-bold uppercase tracking-widest text-sm py-4 px-10 rounded-lg shadow-lg transition-all cursor-pointer flex items-center gap-3 transform hover:-translate-y-0.5"
+              >
+                <Play className="w-4 h-4 fill-current" />
+                <span>Rozpocznij Grę</span>
+              </button>
+
+              <button
+                onClick={() => setShowTeamModal(true)}
+                className="bg-[#f3ede2] hover:bg-[#eae1d0] text-[#8a652e] border border-[#e2d9cc] font-mono text-xs font-bold uppercase tracking-wider py-4 px-6 rounded-lg transition-colors cursor-pointer flex items-center gap-2"
+              >
+                <Users className="w-4 h-4 text-[#8a652e]" />
+                <span>Zespół</span>
+              </button>
+            </div>
 
             <div className="mt-8 font-mono text-[11px] text-[#736c61]">
-              Gra inspirowana nadchodzącą książką autorki Anny Szczypki — „Adam gra w szachy”.
+              Gra inspirowana nadchodzącą książką autorki{' '}
+              <a
+                href="https://www.angielskizmaja.pl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline font-bold text-[#8a652e] hover:text-[#5e431c]"
+              >
+                Anny Szczypki
+              </a>{' '}
+              — „Adam gra w szachy”.
             </div>
           </div>
         ) : (
@@ -283,11 +313,13 @@ export default function App() {
               actTitle={currentNode.actTitle}
               timeLabel={currentNode.timeLabel}
               progressPercent={currentNode.progressPercent}
+              nodeType={currentNode.type}
               soundEnabled={soundEnabled}
               onToggleSound={handleToggleSound}
               onRestart={handleRestart}
               canGoBack={history.length > 0}
               onGoBack={handleGoBack}
+              onOpenTeamModal={() => setShowTeamModal(true)}
             />
 
             {/* Live Stats Indicators */}
@@ -319,10 +351,53 @@ export default function App() {
         )}
       </div>
 
+      {/* Team Modal Overlay */}
+      {showTeamModal && (
+        <div className="fixed inset-0 bg-[#1a1714]/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#ffffff] border border-[#8a652e]/50 rounded-xl max-w-md w-full p-6 shadow-2xl relative animate-fade-in">
+            <button
+              onClick={() => setShowTeamModal(false)}
+              className="absolute top-4 right-4 p-1 rounded bg-[#f3ede2] text-[#736c61] hover:text-[#1a1714] border border-[#e2d9cc] cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-2 mb-3">
+              <Users className="w-5 h-5 text-[#8a652e]" />
+              <h3 className="font-serif text-lg font-bold text-[#1a1714]">
+                Zespół i Twórcy
+              </h3>
+            </div>
+
+            <div className="bg-[#faf8f5] border border-[#e2d9cc] rounded-lg p-4 font-serif text-sm text-[#3a352e] leading-relaxed mb-4">
+              in progress... ale będziemy chcieli podziękować wszystkim którzy brali udział w konsultacjach testach i tworzeniu gry! :)
+            </div>
+
+            <button
+              onClick={() => setShowTeamModal(false)}
+              className="w-full bg-[#8a652e] hover:bg-[#735323] text-[#ffffff] font-mono text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded transition-colors cursor-pointer"
+            >
+              Zamknij
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Footer Branding */}
       <footer className="w-full max-w-3xl mx-auto mt-12 pt-6 border-t border-[#e2d9cc] flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#736c61] gap-2 select-none">
         <span>Fundacja ProjektPL &bull; Gra „W co gra Adam”</span>
-        <span>Autorzy: Anna Szczypka &bull; 2026</span>
+        <span>
+          Autorzy:{' '}
+          <a
+            href="https://www.angielskizmaja.pl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline font-bold text-[#8a652e] hover:text-[#5e431c]"
+          >
+            Anna Szczypka
+          </a>{' '}
+          &bull; 2026
+        </span>
       </footer>
     </div>
   );
