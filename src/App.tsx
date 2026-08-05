@@ -8,6 +8,7 @@ import { GameOverView } from './components/GameOverView';
 import { SuccessView } from './components/SuccessView';
 import { sounds } from './utils/audio';
 import { BookOpen, Sparkles, Play, ShieldAlert, Heart, Brain, Users, X } from 'lucide-react';
+import coffeeMugImg from './assets/images/coffee_mug_1785231805722.jpg';
 
 const STORAGE_KEY = 'w_co_gra_adam_save_state';
 
@@ -236,7 +237,7 @@ export default function App() {
             {/* Splash Illustration Image Banner */}
             <div className="w-full max-w-md mx-auto mb-6 rounded-xl overflow-hidden border border-[#e2d9cc] shadow-md bg-[#ffffff]">
               <img
-                src="/images/coffee_mug.jpg"
+                src={coffeeMugImg}
                 alt="Kawa w kubku - W co gra Adam"
                 referrerPolicy="no-referrer"
                 className="w-full h-56 sm:h-64 object-cover object-center"

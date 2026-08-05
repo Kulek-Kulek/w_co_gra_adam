@@ -1,4 +1,9 @@
 import { GameNode, GameStats } from '../types';
+import coffeeMugImg from '../assets/images/coffee_mug_1785231805722.jpg';
+import sofaCozyImg from '../assets/images/sofa_cozy_1785231821974.jpg';
+import playgroundImg from '../assets/images/playground_1785231836876.jpg';
+import tabletScreenImg from '../assets/images/tablet_screen_1785231851691.jpg';
+import chessBookImg from '../assets/images/chess_book_1785231865451.jpg';
 
 export const INITIAL_STATS: GameStats = {
   parentEnergy: 80,
@@ -14,7 +19,7 @@ export const STORY_NODES: Record<string, GameNode> = {
     actTitle: 'Akt I — Sobotnie Popołudnie',
     timeLabel: '15:30',
     progressPercent: 10,
-    image: '/images/coffee_mug.jpg',
+    image: coffeeMugImg,
     text: `Sobotnie popołudnie. Kawa w Twoim kubku wreszcie ma idealną temperaturę, a kanapa wręcz zaprasza do odpoczynku. W tym momencie podchodzi do Ciebie Twój maluch, patrzy prosto w oczy z tą specyficzną miną i rzuca: **„Nudzi mi się... Mogę tablet? Tylko na chwilę!”**.
 
 Wiesz, jak działa „tylko na chwilę” – algorytmy już zacierają ręce, a Ty czujesz ukłucie wyrzutów sumienia na samą myśl o kolejnej godzinie przed ekranem. Co robisz?`,
@@ -49,6 +54,7 @@ Wiesz, jak działa „tylko na chwilę” – algorytmy już zacierają ręce, a
     actTitle: 'Sobotnie Popołudnie',
     timeLabel: '15:50',
     progressPercent: 25,
+    image: tabletScreenImg,
     text: `Mija obiecane 20 minut. Wchodzisz do pokoju. Dziecko siedzi nieruchomo z twarzą rozświetloną chłodnym blaskiem ekranu. Na Twój widok drga i patrzy błagalnie: **„Eeee, jeszcze tylko chwileczkę! Zaraz wygram tę rundę, proooszę!”**.
 
 Algorytmy zrobiły swoje. Co robisz?`,
@@ -147,6 +153,7 @@ Algorytmy zrobiły swoje. Co robisz?`,
     actTitle: 'Spacer na Świeżym Powietrzu',
     timeLabel: '16:15',
     progressPercent: 30,
+    image: playgroundImg,
     text: `Wybiegacie na dwór! Dziecko biega wokół huśtawek i testuje zjeżdżalnię. Po 40 minutach zaczyna marudzić ze zmęczenia i ciągnie Cię za rękaw: **„Nogi mnie już bolą... Wracajmy! A dasz mi w domu tablet?”**. Jak wracacie?`,
     choices: [
       {
@@ -268,6 +275,7 @@ Algorytmy zrobiły swoje. Co robisz?`,
     actTitle: 'Wspólne Czytanie',
     timeLabel: '17:30',
     progressPercent: 70,
+    image: sofaCozyImg,
     text: `Kanapa okazuje się wyjątkowo wygodna, a dziecko wtula się w Ciebie z książkami. Czysta bliskość. Na co stawiasz podczas wspólnej lektury?`,
     choices: [
       {
@@ -346,6 +354,7 @@ Jak reagujesz na ten protest?`,
     actTitle: 'Opowiadanie o Adasiu',
     timeLabel: '17:50',
     progressPercent: 85,
+    image: chessBookImg,
     text: `Zaczynacie czytać pierwsze opowiadanie. Historia rówieśnika na kółku szachowym od razu wciąga malucha. Trener pokazuje szachownicę: **„This is a chessboard. It has 64 squares”**.
 
 Dziecko przerywa, dotyka ilustracji i mówi: **„O, patrz, konik! A jak on się nazywa po angielsku?”**. Co robisz?`,
